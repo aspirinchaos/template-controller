@@ -1,6 +1,15 @@
 Changelog
 =========
 
+## 0.4.0
+
+- rewrite with e6
+- move `ReactiveObject` to separate file, add export
+- props immutable with defaultValues from SimpleSchema
+- remove unnecessary errors
+- invalid props does not break app
+- more informative invalid props
+
 ## 0.3.0
 
 ### Breaking Changes:

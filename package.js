@@ -12,7 +12,6 @@ Package.onUse((api) => {
     'ecmascript',
     'reactive-var',
     'templating',
-    'blaze-html-templates',
   ]);
 
   api.mainModule('template-controller.js', 'client');

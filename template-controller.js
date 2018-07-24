@@ -35,7 +35,7 @@ const TemplateController = function (templateName, config) {
     throw new Meteor.Error('template-not-found', `No template <${templateName}> found.`);
   }
   const {
-    state, props = {}, helpers = {}, events, onCreated, onRendered, onDestroyed, private = {},
+    state, props, helpers = {}, events, onCreated, onRendered, onDestroyed, private = {},
   } = config;
 
   // Инициируем state и props

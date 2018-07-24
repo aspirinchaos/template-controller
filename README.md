@@ -75,7 +75,7 @@ Table of contents
 ## Installation
 `meteor add space:template-controller`
 
-*Compatible with `Meteor 1.2.x - 1.3.x`*
+*Compatible with `Meteor 1.5.x`*
 
 ## Usage
 
@@ -116,7 +116,7 @@ TemplateController('hello', {
   // Helpers work like before but <this> is always the template instance!
   helpers: {
     someValue() {
-      return this.data.someValue;
+      return this.props.someValue;
     }
   },
 
