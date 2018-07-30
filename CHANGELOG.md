@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## 0.4.1
+
+- add helpers array and object 
+- template return function for render template 
+
 ## 0.4.0
 
 - rewrite with e6

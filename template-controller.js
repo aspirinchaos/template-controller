@@ -1,5 +1,20 @@
 import ReactiveObject from './reactive-object';
 import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+import { Blaze } from 'meteor/blaze';
+
+// This allows us to write inline objects in Blaze templates
+// like so: {{> template param=(object key="value") }}
+// => The template's data context will look like this:
+// { param: { key: "value" } }
+Template.registerHelper('object', ({ hash }) => hash);
+
+// This allows us to write inline arrays in Blaze templates
+// like so: {{> template param=(array 1 2 3) }}
+// => The template's data context will look like this:
+// { param: [1, 2, 3] }
+// удаляем последний элемент, попадает blaze обработчик
+Template.registerHelper('array', (...args) => args.slice(0, -1));
 
 /**
  * Привязка функции к instance Тимплейта
@@ -19,13 +34,27 @@ const bindAllToTemplateInstance = (handlers) => {
   });
   return handlers;
 };
-
 /**
  * Функция для генерации тимплейта
+ * Возвращает функцию, которая делает доступным использование тимплейта в хелперах
+ * функция возвращает сгенерированный HTML тимплейта
+ * и она имеет всего 1 необязательный параметр, который должен быть объектом
+ * в нем передается data контекста тимплейта.
+ * Функция не реактивная, потому что генерирует только HTML,
+ * что бы работал ререндер, необходимо использовать функцию в реактивном контексте
+ * Создание
+ * <code>const Col = createRender('Col');</code>
+ * Использование
+ * <code>
+ * Col();
+ * Col({xs: 1});
+ * Col({xs:1, size: 2, offset: 3});
+ * </code>
  * @param templateName {string} - имя тимплейта
  * @param config {{state: object}, {props: SimpleSchema}, {helpers: object}, {events: object},
  *   {onCreated: function}, {onRendered: function}, {onDestroyed: function}, {private: object}}
  *   Настройки тимплейта
+ * @returns {function(*=): (string)}
  * @constructor
  */
 const TemplateController = function (templateName, config) {
@@ -113,6 +142,8 @@ const TemplateController = function (templateName, config) {
   if (onDestroyed) {
     template.onDestroyed(onDestroyed);
   }
+
+  return (data = {}) => Blaze.toHTMLWithData(template, data);
 };
 
 TemplateController.bindToTemplateInstance = bindToTemplateInstance;

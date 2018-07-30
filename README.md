@@ -405,6 +405,30 @@ let bound = TemplateController.bindToTemplateInstance(Function);
 TemplateController.bindAllToTemplateInstance({ key: Function, ... });
 ```
 
+### Render template in helpers
+TemplateController return a function, that can be used to render template in js files.
+```javascript
+const Icon = TemplateController('icon', {...});
+
+// in other template helper
+helpers :{
+  myIcon() {
+    return Icon({name: 'plus', size: 'lg'});
+  }
+}
+
+```
+
+### array and object helpers
+Blaze not provide how to use array and object in html, these help do this:
+```spacebars
+{{> someTemplate array=[1,2,3] object={ x:1, y:2, z:3 } }}
+```
+like that:
+```spacebars
+{{> someTemplate array=(array 1 2 3) object=(object x=1 y=2 z=3)}}
+```
+
 ## Configuration
 
 ### `TemplateController.setPropsCleanConfiguration(Object)`
