@@ -1,6 +1,11 @@
 Changelog
 =========
 
+## 0.4.2
+
+- add iterator for ReactiveObject 
+- default value for ReactiveObject property is `undefined` 
+
 ## 0.4.1
 
 - add helpers array and object 

@@ -13,11 +13,19 @@ class ReactiveObject {
   }
 
   /**
+   * Для работы spead
+   * @return {{}}
+   */
+  [Symbol.iterator]() {
+    return this.all();
+  }
+
+  /**
    * Создание гет и сет для поля
    * @param key {string} - имя поля
    * @param defaultValue [{any}] - дефолтное значение
    */
-  addProperty(key, defaultValue = null) {
+  addProperty(key, defaultValue = undefined) {
     const property = new ReactiveVar(defaultValue);
     Object.defineProperty(this, key, {
       get: () => property.get(),

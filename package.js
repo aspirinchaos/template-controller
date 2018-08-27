@@ -1,7 +1,7 @@
 Package.describe({
   summary: 'Syntactic sugar for blaze templates',
   name: 'template-controller',
-  version: '0.4.1',
+  version: '0.4.2',
   git: 'https://github.com/meteor-space/template-controller.git',
 });
 
